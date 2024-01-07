@@ -28,14 +28,17 @@ class EmailSender:
         self.creds = self.flow.run_local_server(port=0)
         self.service = build("gmail", "v1", credentials=self.creds)
 
-    def send_message(self):
-        with open("captured_image.jpg", "rb") as f:
+    def send_message(self, subject: str, recipient: str, image_name: str, body: str):
+        assert recipient is not None, "Unable to send message due to empty recipient"
+
+        with open(image_name, "rb") as f:
             image_part = MIMEImage(f.read())
+
         message = MIMEMultipart()
 
-        message["Subject"] = "Test Email Subject"
-        message["To"] = "mpguser004@gmail.com"
-        html_part = MIMEText("with image")
+        message["Subject"] = subject
+        message["To"] = recipient
+        html_part = MIMEText(body)
         message.attach(html_part)
         message.attach(image_part)
         create_message = {"raw": base64.urlsafe_b64encode(message.as_bytes()).decode()}
@@ -56,5 +59,10 @@ class EmailSender:
 if __name__ == "__main__":
     new_mail = EmailSender()
     new_mail.initialize_system()
-    time.sleep(10)
-    new_mail.send_message()
+    time.sleep(3)
+    new_mail.send_message(
+        recipient="mpguser004@gmail.com",
+        body="Hello Parent, Earl John abaquita has arrived in school at 07:52am",
+        subject="Attendance notification",
+        image_name="captured_image.jpg",
+    )
