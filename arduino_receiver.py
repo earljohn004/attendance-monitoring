@@ -11,6 +11,9 @@ class ArduinoReceiver:
         self.serial = serial.Serial(
             self.arduino_port, self.baud_rate, timeout=self.timeout
         )
+    
+    def configure_port(self, port):
+        self.arduino_port = port
 
     def read_serial(self):
         time.sleep(self.delay_start)
@@ -19,6 +22,7 @@ class ArduinoReceiver:
                 if self.serial.in_waiting > 0:
                     data = self.serial.readline().decode("utf-8").strip()
                     print(f"Received from Arduino: {data}")
+                    # TODO: Kani diri na part kay need ta ug code na mutrigger ra sa capture sa arduino
 
         except serial.SerialException as e:
             print(f"Error: {e}")
