@@ -1,4 +1,6 @@
 .venv/
+rfid_reference/
+__pycache__/
 
 credentials.json
 token.json
