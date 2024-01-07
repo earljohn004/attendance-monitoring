@@ -1,5 +1,6 @@
 opencv-python==4.9.0.80
 pyserial==3.5
+keyboard==0.13.5
 google-auth==2.26.1
 google-auth-oauthlib==1.2.0
 google-auth-httplib2==0.2.0
