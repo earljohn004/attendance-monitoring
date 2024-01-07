@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
             print("Sending email....")
             now = datetime.now()
-            current_time = now.strftime("%d/%m/%Y, %H:%M:%S")
+            current_time = now.strftime("%m/%d/%Y, %H:%M:%S")
             new_mail.send_message(
                 recipient="mpguser004@gmail.com",
                 body=f"Hello Parent, Earl John abaquita has arrived in school at {current_time}",
