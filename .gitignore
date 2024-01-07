@@ -1,0 +1,8 @@
+.venv/
+
+credentials.json
+token.json
+reqs.txt
+
+
+captured_image.jpg
