@@ -10,7 +10,9 @@ from requests import HTTPError
 
 
 class EmailSender:
-    SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
+    SCOPES = [
+        "https://www.googleapis.com/auth/gmail.send",
+    ]
     CREDENTIALS_JSON = "credentials.json"
 
     def __init__(self):
