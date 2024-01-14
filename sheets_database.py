@@ -54,7 +54,7 @@ class SheetsDatabase:
 
     def find_id_number(self, search_id: str):
         if not self.values:
-            return ""
+            return ("", "")
 
         for row in self.values:
             if row[0] == search_id:

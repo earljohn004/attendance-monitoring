@@ -11,18 +11,26 @@ class ArduinoReceiver:
         self.serial = serial.Serial(
             self.arduino_port, self.baud_rate, timeout=self.timeout
         )
-    
+
     def configure_port(self, port):
         self.arduino_port = port
 
-    def read_serial(self):
+    def debug_func_call(self, func):
+        func(id_number="EBF64222")
+
+    def read_serial(self, func):
         time.sleep(self.delay_start)
         try:
             while True:
                 if self.serial.in_waiting > 0:
                     data = self.serial.readline().decode("utf-8").strip()
                     print(f"Received from Arduino: {data}")
-                    # TODO: Kani diri na part kay need ta ug code na mutrigger ra sa capture sa arduino
+
+                    # Arduino input data should be on this format
+                    # attendance_monitoring_id:xxxxxxxx
+                    if "attendance_monitoring_id" in data:
+                        received_id_number = data.split(":")
+                        func(id_number=received_id_number)
 
         except serial.SerialException as e:
             print(f"Error: {e}")
